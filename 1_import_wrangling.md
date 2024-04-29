@@ -63,20 +63,20 @@ library(devtools)
 library(AppleHealthAnalysis)
 
 # Importing with AppleHealthAnalysis
-health_data <- ah_import_xml("/Users/zorbeyozcan/Desktop/apple_health/health_data_visualization/apple_health_export/Export.xml")
+health_data <- ah_import_xml("/Users/zorbeyozcan/Desktop/apple_health/Apple_health_data/apple_health_export/Export.xml")
 ```
 
     ## File size: 138.9 MiB
     ## Estimated import time at 5MiB/s: 28 seconds
-    ## Import started at: 2024-04-29 13:23:55
+    ## Import started at: 2024-04-29 13:46:34
 
     ## Warning in
-    ## ah_import_xml("/Users/zorbeyozcan/Desktop/apple_health/health_data_visualization/apple_health_export/Export.xml"):
+    ## ah_import_xml("/Users/zorbeyozcan/Desktop/apple_health/Apple_health_data/apple_health_export/Export.xml"):
     ## NAs introduced by coercion
 
-    ## Import finished at: 2024-04-29 13:24:13
+    ## Import finished at: 2024-04-29 13:46:52
     ## Time for import: 18 seconds
-    ## File size/running time: 7.8 MiB per second
+    ## File size/running time: 7.9 MiB per second
 
 # Exploring the data set
 
@@ -350,7 +350,7 @@ all_dataframes <- list(StepCount_by_day = StepCount_by_day,
 
 # Saving all data frames as rds files.
 for (name in names (all_dataframes)) {
-  saveRDS(all_dataframes[[name]], file = paste0("/Users/zorbeyozcan/Desktop/apple_health/health_data_visualization/all_rds", name, ".rds"))
+  saveRDS(all_dataframes[[name]], file = paste0("/Users/zorbeyozcan/Desktop/apple_health/Apple_health_data", name, ".rds"))
 }
 
 # Cleaning up unused values and data frames.
