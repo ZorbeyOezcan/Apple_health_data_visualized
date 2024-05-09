@@ -18,6 +18,7 @@ library(tidyverse)
 library(dplyr)
 library(lubridate)
 library(readr)
+library(git2r)
 })
 ```
 
@@ -30,6 +31,18 @@ library(readr)
     ## ✖ dplyr::filter() masks stats::filter()
     ## ✖ dplyr::lag()    masks stats::lag()
     ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+    ## 
+    ## Attaching package: 'git2r'
+    ## 
+    ## 
+    ## The following object is masked from 'package:dplyr':
+    ## 
+    ##     pull
+    ## 
+    ## 
+    ## The following objects are masked from 'package:purrr':
+    ## 
+    ##     is_empty, when
 
 # Exploring my data - Step Count
 
@@ -85,7 +98,7 @@ avg_step_by_year <- StepCount_by_day %>%
 
 # Plotting
 ggplot(avg_step_by_year, aes(year, avg_steps_y, fill = year)) + 
-  geom_bar(stat= "identity" , position = position_dodge()) + 
+  geom_bar(stat= "identity" , position = position_dodge(), show.legend = FALSE) + 
   labs( x = "" , y = " average steps", title = "Average Daily Steps by Year")
 ```
 
@@ -126,6 +139,7 @@ step_by_season <- StepCount_by_day %>%
 avg_step_by_season <- step_by_season %>%
   group_by(year, season) %>%
   summarise(average_steps = mean(StepCountDaily, na.rm = TRUE), .groups = 'drop') %>%
+  filter(year != 2024) %>%
   mutate(year_season = interaction(year, season, sep = " "),
          year_season = factor(year_season, levels = c("2019 Spring", "2019 Summer", "2019 Fall", "2019 Winter",
                                                       "2020 Spring", "2020 Summer", "2020 Fall", "2020 Winter",
@@ -136,7 +150,7 @@ avg_step_by_season <- step_by_season %>%
 # Plotting 
 ggplot(avg_step_by_season, aes( year_season, average_steps, fill = year)) +
   
-  geom_bar(stat = "identity", position = "dodge") +
+  geom_bar(stat = "identity", position = "dodge", show.legend = FALSE) +
   
   labs(x = "Year and Season", y = "Average Daily Steps", title = "Average Daily Steps by Season and Year") +
   
